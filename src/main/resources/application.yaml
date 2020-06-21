@@ -1,0 +1,16 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /api
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:~/dictionary;AUTO_SERVER=TRUE
+    driverClassName: org.h2.Driver
+    username: dict
+    password: root
+  h2:
+    console:
+      enabled: true
