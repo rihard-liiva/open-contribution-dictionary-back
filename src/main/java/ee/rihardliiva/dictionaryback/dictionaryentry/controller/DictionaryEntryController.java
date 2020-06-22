@@ -21,8 +21,13 @@ public class DictionaryEntryController {
     }
 
     @GetMapping("/search/{word}/{languageId}")
-    public List<DictionaryEntry> findEntryByUserInputAnyLanguage(@PathVariable String word, @PathVariable Long languageId) {
-        return dictionaryEntryService.findEntriesByUserInputAndLanguage(word, languageId);
+    public List<DictionaryEntry> findEntryByUserInputFromAnyLanguageToGivenLanguage(@PathVariable String word, @PathVariable Long languageId) {
+        return dictionaryEntryService.findEntryByUserInputFromAnyLanguageToGivenLanguage(word, languageId);
+    }
+
+    @GetMapping("/search/{word}/{fromLanguageId}/{inLanguageId}")
+    public List<DictionaryEntry> findEntryByUserInputFromGivenLanguageToGivenLanguage(@PathVariable String word, @PathVariable Long fromLanguageId, @PathVariable Long inLanguageId) {
+        return dictionaryEntryService.findEntryByUserInputFromGivenLanguageToGivenLanguage(word, fromLanguageId, inLanguageId);
     }
 
     @PostMapping
@@ -30,7 +35,7 @@ public class DictionaryEntryController {
         return dictionaryEntryService.createDictionaryEntry(dictionaryEntry);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteEntryById(@PathVariable Long id) {
         dictionaryEntryService.deleteEntryById(id);
     }

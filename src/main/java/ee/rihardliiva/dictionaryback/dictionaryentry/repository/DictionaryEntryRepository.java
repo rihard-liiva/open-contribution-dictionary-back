@@ -9,5 +9,10 @@ public interface DictionaryEntryRepository extends JpaRepository<DictionaryEntry
 
     List<DictionaryEntry> findByWordContaining(String word);
     List<DictionaryEntry> findByWordContainingAndOriginatingLanguageId(String word, Long id);
+    List<DictionaryEntry> findByWordContainingAndOriginatingLanguageIdAndEquivalentLanguageId(
+            String word,
+            Long originatingLanguageId,
+            Long EquivalentLanguageId
+    );
 
 }

@@ -19,8 +19,12 @@ public class DictionaryEntryService {
         return dictionaryEntryRepository.findByWordContaining(word);
     }
 
-    public List<DictionaryEntry> findEntriesByUserInputAndLanguage(String word, Long languageId) {
+    public List<DictionaryEntry> findEntryByUserInputFromAnyLanguageToGivenLanguage(String word, Long languageId) {
         return dictionaryEntryRepository.findByWordContainingAndOriginatingLanguageId(word, languageId);
+    }
+
+    public List<DictionaryEntry> findEntryByUserInputFromGivenLanguageToGivenLanguage(String word, Long fromLanguageId, Long inLanguageId) {
+        return dictionaryEntryRepository.findByWordContainingAndOriginatingLanguageIdAndEquivalentLanguageId(word, fromLanguageId, inLanguageId);
     }
 
     public DictionaryEntry createDictionaryEntry(DictionaryEntry dictionaryEntry) {

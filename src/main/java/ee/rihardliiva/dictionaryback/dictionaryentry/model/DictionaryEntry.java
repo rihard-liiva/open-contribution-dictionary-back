@@ -24,4 +24,7 @@ public class DictionaryEntry {
     @NonNull
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Language originatingLanguage;
+    @NonNull
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Language equivalentLanguage;
 }

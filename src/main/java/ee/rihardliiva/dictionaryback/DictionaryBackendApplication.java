@@ -22,24 +22,24 @@ public class DictionaryBackendApplication {
 	@Bean
 	public CommandLineRunner createEntries(DictionaryEntryRepository dictionaryEntryRepository) {
 
-		Language est = new Language("EST");
-		Language eng = new Language("ENG");
-		Language rus = new Language("RUS");
+		Language est = new Language("Estonian");
+		Language eng = new Language("English");
+		Language rus = new Language("Russian");
 
 		return (args) -> {
 			List<DictionaryEntry> words = List.of(
-					new DictionaryEntry("tere", "hello", est),
-					new DictionaryEntry("laud", "table", est),
-					new DictionaryEntry("laud", "blaablaa", rus),
-					new DictionaryEntry("tool", "chair", est),
-					new DictionaryEntry("diivan", "couch", est),
-					new DictionaryEntry("bed", "voodi", eng),
-					new DictionaryEntry("table", "laud", eng),
-					new DictionaryEntry("keyboard", "klaviatuur", eng),
-					new DictionaryEntry("piano", "klaver", eng),
-					new DictionaryEntry("car", "auto", eng),
-					new DictionaryEntry("truck", "veoauto", eng),
-					new DictionaryEntry("sun", "päike", eng));
+					new DictionaryEntry("tere", "hello", est, eng),
+					new DictionaryEntry("laud", "table", est, eng),
+					new DictionaryEntry("laud", "blaablaa", est, rus),
+					new DictionaryEntry("tool", "chair", est, eng),
+					new DictionaryEntry("diivan", "couch", est, eng),
+					new DictionaryEntry("bed", "voodi", eng, est),
+					new DictionaryEntry("table", "laud", eng, est),
+					new DictionaryEntry("keyboard", "klaviatuur", eng, est),
+					new DictionaryEntry("piano", "klaver", eng, est),
+					new DictionaryEntry("car", "auto", eng, est),
+					new DictionaryEntry("truck", "veoauto", eng, est),
+					new DictionaryEntry("sun", "päike", eng, est));
 			dictionaryEntryRepository.saveAll(words);
 		};
 	}
