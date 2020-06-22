@@ -14,5 +14,6 @@ public interface DictionaryEntryRepository extends JpaRepository<DictionaryEntry
             Long originatingLanguageId,
             Long EquivalentLanguageId
     );
+    void deleteById(Long id);
 
 }

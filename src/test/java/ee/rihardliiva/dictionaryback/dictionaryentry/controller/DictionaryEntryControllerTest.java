@@ -1,10 +1,10 @@
 package ee.rihardliiva.dictionaryback.dictionaryentry.controller;
 
 import ee.rihardliiva.dictionaryback.dictionaryentry.model.DictionaryEntry;
-import org.junit.Ignore;
+import ee.rihardliiva.dictionaryback.language.model.Language;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
@@ -13,7 +13,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.Resource;
 
@@ -67,4 +66,31 @@ public class DictionaryEntryControllerTest {
         assertEquals(dictionaryEntries.get(0).getEquivalent(), DICTIONARY_ENTRY_1_EQUIVALENT);
     }
 
+    @Test
+    public void deleteEntry() {
+        ResponseEntity<List<DictionaryEntry>> entity = restTemplate.exchange("/entry", HttpMethod.GET, null, DICTIONARY_ENTRY_LIST);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        List<DictionaryEntry> entries = entity.getBody();
+        assertTrue(isNotEmpty(entries));
+        int numberOfEntries = entries.size();
+        restTemplate.delete("/entry/delete/7", HttpMethod.DELETE, null);
+        entity = restTemplate.exchange("/entry", HttpMethod.GET, null, DICTIONARY_ENTRY_LIST);
+        entries = entity.getBody();
+        assertEquals(numberOfEntries - 1, entries.size());
+    }
+
+    @Test
+    public void createEntry() {
+        DictionaryEntry dictionaryEntry = new DictionaryEntry("kollane", "yellow", new Language("Polish"), new Language("Swedish"));
+        ResponseEntity<List<DictionaryEntry>> entity = restTemplate.exchange("/entry", HttpMethod.GET, null, DICTIONARY_ENTRY_LIST);
+        assertEquals(HttpStatus.OK, entity.getStatusCode());
+        List<DictionaryEntry> entries = entity.getBody();
+        assertTrue(isNotEmpty(entries));
+        int numberOfEntries = entries.size();
+        restTemplate.exchange("/entry", HttpMethod.POST, new HttpEntity<>(dictionaryEntry), DictionaryEntry.class);
+        entity = restTemplate.exchange("/entry", HttpMethod.GET, null, DICTIONARY_ENTRY_LIST);
+        entries = entity.getBody();
+        assertTrue(isNotEmpty(entries));
+        assertEquals(entries.size() - 1, numberOfEntries);
+    }
 }
