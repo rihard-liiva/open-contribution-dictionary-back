@@ -25,4 +25,9 @@ public class DictionaryEntryController {
         return dictionaryEntryService.findEntriesByUserInputAndLanguage(word, languageId);
     }
 
+    @PostMapping
+    public DictionaryEntry addEntryToDictionary(@RequestBody DictionaryEntry dictionaryEntry) {
+        return dictionaryEntryService.createDictionaryEntry(dictionaryEntry);
+    }
+
 }

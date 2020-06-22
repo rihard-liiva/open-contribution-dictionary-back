@@ -1,9 +1,10 @@
 package ee.rihardliiva.dictionaryback.dictionaryentry.service;
 
+import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryValidationException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.model.DictionaryEntry;
 import ee.rihardliiva.dictionaryback.dictionaryentry.repository.DictionaryEntryRepository;
-import ee.rihardliiva.dictionaryback.language.repository.LanguageRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,5 +21,12 @@ public class DictionaryEntryService {
 
     public List<DictionaryEntry> findEntriesByUserInputAndLanguage(String word, Long languageId) {
         return dictionaryEntryRepository.findByWordContainingAndOriginatingLanguageId(word, languageId);
+    }
+
+    public DictionaryEntry createDictionaryEntry(DictionaryEntry dictionaryEntry) {
+        if (StringUtils.isBlank(dictionaryEntry.getWord()) || StringUtils.isBlank(dictionaryEntry.getEquivalent())) {
+            throw new DictionaryEntryValidationException();
+        }
+        return dictionaryEntryRepository.save(dictionaryEntry);
     }
 }
