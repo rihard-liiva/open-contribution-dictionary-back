@@ -28,10 +28,17 @@ public class DictionaryBackendApplication {
 
 		return (args) -> {
 			List<DictionaryEntry> words = List.of(
-					new DictionaryEntry("Tere", "Hello", est),
-					new DictionaryEntry("Tere", "Hello", est),
-					new DictionaryEntry("Laud", "Table", est),
-					new DictionaryEntry("Tool", "Chair", est));
+					new DictionaryEntry("tere", "hello", est),
+					new DictionaryEntry("laud", "table", est),
+					new DictionaryEntry("tool", "chair", est),
+					new DictionaryEntry("diivan", "couch", est),
+					new DictionaryEntry("bed", "voodi", eng),
+					new DictionaryEntry("table", "laud", eng),
+					new DictionaryEntry("keyboard", "klaviatuur", eng),
+					new DictionaryEntry("piano", "klaver", eng),
+					new DictionaryEntry("car", "auto", eng),
+					new DictionaryEntry("truck", "veoauto", eng),
+					new DictionaryEntry("sun", "päike", eng));
 			dictionaryEntryRepository.saveAll(words);
 		};
 	}
