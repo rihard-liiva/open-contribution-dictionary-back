@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DictionaryEntryRepository extends JpaRepository<DictionaryEntry, Long> {
 
-    List<DictionaryEntry> findByWordLike(String word);
+    List<DictionaryEntry> findByWordContaining(String word);
+    List<DictionaryEntry> findByWordContainingAndOriginatingLanguageId(String word, Long id);
 
 }

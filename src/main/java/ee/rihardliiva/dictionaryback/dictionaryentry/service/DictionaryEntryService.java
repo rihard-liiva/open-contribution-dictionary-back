@@ -13,9 +13,12 @@ import java.util.List;
 public class DictionaryEntryService {
 
     private final DictionaryEntryRepository dictionaryEntryRepository;
-    private final LanguageRepository languageRepository;
 
-    public List<DictionaryEntry> findEntryByUserInput(String word) {
-        return dictionaryEntryRepository.findByWordLike(word);
+    public List<DictionaryEntry> findEntriesByUserInput(String word) {
+        return dictionaryEntryRepository.findByWordContaining(word);
+    }
+
+    public List<DictionaryEntry> findEntriesByUserInputAndLanguage(String word, Long languageId) {
+        return dictionaryEntryRepository.findByWordContainingAndOriginatingLanguageId(word, languageId);
     }
 }
