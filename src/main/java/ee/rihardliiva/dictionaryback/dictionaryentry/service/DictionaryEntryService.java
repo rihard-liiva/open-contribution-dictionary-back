@@ -1,10 +1,12 @@
 package ee.rihardliiva.dictionaryback.dictionaryentry.service;
 
+import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryNotFoundException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryValidationException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.model.DictionaryEntry;
 import ee.rihardliiva.dictionaryback.dictionaryentry.repository.DictionaryEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +38,14 @@ public class DictionaryEntryService {
 
     public void deleteEntryById(Long id) {
         dictionaryEntryRepository.deleteById(id);
+    }
+
+    public DictionaryEntry findById(Long id) {
+        return dictionaryEntryRepository.findById(id).orElseThrow(DictionaryEntryNotFoundException::new);
+
+    }
+
+    public List<DictionaryEntry> findAll() {
+        return dictionaryEntryRepository.findAll();
     }
 }

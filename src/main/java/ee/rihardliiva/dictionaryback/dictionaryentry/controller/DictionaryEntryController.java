@@ -15,6 +15,16 @@ public class DictionaryEntryController {
     @Resource
     private DictionaryEntryService dictionaryEntryService;
 
+    @GetMapping
+    public List<DictionaryEntry> findAllEntries() {
+        return dictionaryEntryService.findAll();
+    }
+
+    @GetMapping("/id/{id}")
+    public DictionaryEntry findEntryById(@PathVariable Long id) {
+        return dictionaryEntryService.findById(id);
+    }
+
     @GetMapping("/search/{word}")
     public List<DictionaryEntry> findEntryByUserInputAnyLanguage(@PathVariable String word) {
         return dictionaryEntryService.findEntriesByUserInput(word);
