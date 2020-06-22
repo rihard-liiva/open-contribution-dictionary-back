@@ -1,10 +1,12 @@
 package ee.rihardliiva.dictionaryback.dictionaryentry.service;
 
+import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryNotFoundException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryValidationException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.model.DictionaryEntry;
 import ee.rihardliiva.dictionaryback.dictionaryentry.repository.DictionaryEntryRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,12 @@ public class DictionaryEntryService {
         return dictionaryEntryRepository.findByWordContaining(word);
     }
 
-    public List<DictionaryEntry> findEntriesByUserInputAndLanguage(String word, Long languageId) {
+    public List<DictionaryEntry> findEntryByUserInputFromAnyLanguageToGivenLanguage(String word, Long languageId) {
         return dictionaryEntryRepository.findByWordContainingAndOriginatingLanguageId(word, languageId);
+    }
+
+    public List<DictionaryEntry> findEntryByUserInputFromGivenLanguageToGivenLanguage(String word, Long fromLanguageId, Long inLanguageId) {
+        return dictionaryEntryRepository.findByWordContainingAndOriginatingLanguageIdAndEquivalentLanguageId(word, fromLanguageId, inLanguageId);
     }
 
     public DictionaryEntry createDictionaryEntry(DictionaryEntry dictionaryEntry) {
@@ -28,5 +34,18 @@ public class DictionaryEntryService {
             throw new DictionaryEntryValidationException();
         }
         return dictionaryEntryRepository.save(dictionaryEntry);
+    }
+
+    public void deleteEntryById(Long id) {
+        dictionaryEntryRepository.delete(dictionaryEntryRepository.findById(id).get());
+    }
+
+    public DictionaryEntry findById(Long id) {
+        return dictionaryEntryRepository.findById(id).orElseThrow(DictionaryEntryNotFoundException::new);
+
+    }
+
+    public List<DictionaryEntry> findAll() {
+        return dictionaryEntryRepository.findAll();
     }
 }

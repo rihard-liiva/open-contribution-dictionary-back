@@ -15,19 +15,39 @@ public class DictionaryEntryController {
     @Resource
     private DictionaryEntryService dictionaryEntryService;
 
+    @GetMapping
+    public List<DictionaryEntry> findAllEntries() {
+        return dictionaryEntryService.findAll();
+    }
+
+    @GetMapping("/id/{id}")
+    public DictionaryEntry findEntryById(@PathVariable Long id) {
+        return dictionaryEntryService.findById(id);
+    }
+
     @GetMapping("/search/{word}")
     public List<DictionaryEntry> findEntryByUserInputAnyLanguage(@PathVariable String word) {
         return dictionaryEntryService.findEntriesByUserInput(word);
     }
 
     @GetMapping("/search/{word}/{languageId}")
-    public List<DictionaryEntry> findEntryByUserInputAnyLanguage(@PathVariable String word, @PathVariable Long languageId) {
-        return dictionaryEntryService.findEntriesByUserInputAndLanguage(word, languageId);
+    public List<DictionaryEntry> findEntryByUserInputFromAnyLanguageToGivenLanguage(@PathVariable String word, @PathVariable Long languageId) {
+        return dictionaryEntryService.findEntryByUserInputFromAnyLanguageToGivenLanguage(word, languageId);
+    }
+
+    @GetMapping("/search/{word}/{fromLanguageId}/{inLanguageId}")
+    public List<DictionaryEntry> findEntryByUserInputFromGivenLanguageToGivenLanguage(@PathVariable String word, @PathVariable Long fromLanguageId, @PathVariable Long inLanguageId) {
+        return dictionaryEntryService.findEntryByUserInputFromGivenLanguageToGivenLanguage(word, fromLanguageId, inLanguageId);
     }
 
     @PostMapping
     public DictionaryEntry addEntryToDictionary(@RequestBody DictionaryEntry dictionaryEntry) {
         return dictionaryEntryService.createDictionaryEntry(dictionaryEntry);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteEntryById(@PathVariable Long id) {
+        dictionaryEntryService.deleteEntryById(id);
     }
 
 }

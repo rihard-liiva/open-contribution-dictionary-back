@@ -2,6 +2,8 @@ package ee.rihardliiva.dictionaryback.dictionaryentry.model;
 
 import ee.rihardliiva.dictionaryback.language.model.Language;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -22,6 +24,9 @@ public class DictionaryEntry {
     @NonNull
     private String equivalent;
     @NonNull
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private Language originatingLanguage;
+    @NonNull
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Language equivalentLanguage;
 }
