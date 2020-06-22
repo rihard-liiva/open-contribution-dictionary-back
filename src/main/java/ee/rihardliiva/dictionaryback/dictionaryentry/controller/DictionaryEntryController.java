@@ -1,14 +1,23 @@
 package ee.rihardliiva.dictionaryback.dictionaryentry.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ee.rihardliiva.dictionaryback.dictionaryentry.model.DictionaryEntry;
+import ee.rihardliiva.dictionaryback.dictionaryentry.service.DictionaryEntryService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600, allowedHeaders = "*")
 @RestController
 @RequestMapping("/entry")
 public class DictionaryEntryController {
 
+    @Resource
+    private DictionaryEntryService dictionaryEntryService;
 
+    @GetMapping("/search/{word}")
+    public List<DictionaryEntry> findEntryByUserInput(@PathVariable String word) {
+        return dictionaryEntryService.findEntryByUserInput(word);
+    }
 
 }
