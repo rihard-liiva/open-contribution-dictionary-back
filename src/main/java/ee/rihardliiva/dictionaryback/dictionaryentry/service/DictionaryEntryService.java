@@ -16,6 +16,6 @@ public class DictionaryEntryService {
     private final LanguageRepository languageRepository;
 
     public List<DictionaryEntry> findEntryByUserInput(String word) {
-        return null;
+        return dictionaryEntryRepository.findByWordLike(word);
     }
 }

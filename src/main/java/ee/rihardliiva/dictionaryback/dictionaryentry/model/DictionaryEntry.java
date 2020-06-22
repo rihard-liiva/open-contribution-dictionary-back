@@ -22,6 +22,6 @@ public class DictionaryEntry {
     @NonNull
     private String equivalent;
     @NonNull
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Language originatingLanguage;
 }
