@@ -29,4 +29,8 @@ public class DictionaryEntryService {
         }
         return dictionaryEntryRepository.save(dictionaryEntry);
     }
+
+    public void deleteEntryById(Long id) {
+        dictionaryEntryRepository.deleteById(id);
+    }
 }

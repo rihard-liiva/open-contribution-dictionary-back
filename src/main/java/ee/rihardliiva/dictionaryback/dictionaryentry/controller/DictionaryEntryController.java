@@ -30,4 +30,9 @@ public class DictionaryEntryController {
         return dictionaryEntryService.createDictionaryEntry(dictionaryEntry);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteEntryById(@PathVariable Long id) {
+        dictionaryEntryService.deleteEntryById(id);
+    }
+
 }
