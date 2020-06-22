@@ -30,6 +30,7 @@ public class DictionaryBackendApplication {
 			List<DictionaryEntry> words = List.of(
 					new DictionaryEntry("tere", "hello", est),
 					new DictionaryEntry("laud", "table", est),
+					new DictionaryEntry("laud", "blaablaa", rus),
 					new DictionaryEntry("tool", "chair", est),
 					new DictionaryEntry("diivan", "couch", est),
 					new DictionaryEntry("bed", "voodi", eng),
