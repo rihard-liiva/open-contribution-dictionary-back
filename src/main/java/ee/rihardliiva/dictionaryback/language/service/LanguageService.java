@@ -25,12 +25,12 @@ public class LanguageService {
     }
 
     public Language findLanguageById(Long id) {
-        return languageRepository.findById(id).orElseThrow(() -> new LanguageNotFoundException("Language not found"));
+        return languageRepository.findById(id).orElseThrow(() -> new LanguageNotFoundException());
     }
 
     public Language createNewLanguage(Language language) throws LanguageValidationException {
         if (StringUtils.isBlank(language.getLanguageName())) {
-            throw new LanguageValidationException("Language name cannot be blank");
+            throw new LanguageValidationException();
         }
         return languageRepository.save(language);
     }
@@ -40,7 +40,7 @@ public class LanguageService {
         List<DictionaryEntry> dictionaryEntries = dictionaryEntryService.findAll();
         for (DictionaryEntry dictEntry : dictionaryEntries) {
             if (dictEntry.getEquivalentLanguage().getId().equals(language.getId()) || dictEntry.getOriginatingLanguage().getId().equals(language.getId())) {
-                throw new LanguageHasUsagesException("Language has usages and cannot be deleted");
+                throw new LanguageHasUsagesException();
             }
         }
         languageRepository.delete(findLanguageById(id));
