@@ -25,8 +25,8 @@ public class DictionaryBackendApplication {
 	@Bean
 	public CommandLineRunner createEntries(DictionaryEntryRepository dictionaryEntryRepository) {
 
-		Language est = new Language("Estonian");
 		Language eng = new Language("English");
+		Language est = new Language("Estonian");
 		Language rus = new Language("Russian");
 
 		return (args) -> {

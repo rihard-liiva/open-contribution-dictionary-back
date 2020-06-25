@@ -1,5 +1,6 @@
 package ee.rihardliiva.dictionaryback.dictionaryentry.service;
 
+import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryAlreadyExistsException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryNotFoundException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.exceptions.DictionaryEntryValidationException;
 import ee.rihardliiva.dictionaryback.dictionaryentry.model.DictionaryEntry;
@@ -32,6 +33,9 @@ public class DictionaryEntryService {
     public DictionaryEntry createDictionaryEntry(DictionaryEntry dictionaryEntry) {
         if (StringUtils.isBlank(dictionaryEntry.getWord()) || StringUtils.isBlank(dictionaryEntry.getEquivalent())) {
             throw new DictionaryEntryValidationException();
+        }
+        if (dictionaryEntryRepository.findByWordAndEquivalentAndOriginatingLanguageIdAndEquivalentLanguageId(dictionaryEntry.getWord(), dictionaryEntry.getEquivalent(), dictionaryEntry.getOriginatingLanguage().getId(), dictionaryEntry.getEquivalentLanguage().getId()) != null) {
+            throw new DictionaryEntryAlreadyExistsException();
         }
         return dictionaryEntryRepository.save(dictionaryEntry);
     }
