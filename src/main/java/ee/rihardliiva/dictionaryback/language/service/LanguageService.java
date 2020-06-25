@@ -25,7 +25,7 @@ public class LanguageService {
     }
 
     public Language findLanguageById(Long id) {
-        return languageRepository.findById(id).orElseThrow(() -> new LanguageNotFoundException());
+        return languageRepository.findById(id).orElseThrow(LanguageNotFoundException::new);
     }
 
     public Language createNewLanguage(Language language) throws LanguageValidationException {
