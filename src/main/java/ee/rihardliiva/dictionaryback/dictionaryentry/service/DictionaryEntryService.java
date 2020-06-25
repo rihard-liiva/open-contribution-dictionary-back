@@ -37,7 +37,7 @@ public class DictionaryEntryService {
     }
 
     public void deleteEntryById(Long id) {
-        dictionaryEntryRepository.delete(dictionaryEntryRepository.findById(id).get());
+        dictionaryEntryRepository.delete(findById(id));
     }
 
     public DictionaryEntry findById(Long id) {
@@ -48,4 +48,5 @@ public class DictionaryEntryService {
     public List<DictionaryEntry> findAll() {
         return dictionaryEntryRepository.findAll();
     }
+
 }
