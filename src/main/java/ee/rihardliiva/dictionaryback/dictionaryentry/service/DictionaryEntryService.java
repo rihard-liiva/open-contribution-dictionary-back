@@ -48,4 +48,5 @@ public class DictionaryEntryService {
     public List<DictionaryEntry> findAll() {
         return dictionaryEntryRepository.findAll();
     }
+
 }
