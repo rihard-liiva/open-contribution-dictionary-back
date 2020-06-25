@@ -32,7 +32,7 @@ public class DictionaryEntryControllerTest {
     public static final String DICTIONARY_ENTRY_1_EQUIVALENT = "hello";
     public static final String DICTIONARY_ENTRY_2_WORD = "laud";
     public static final String DICTIONARY_ENTRY_2_EQUIVALENT = "table";
-    public static final String TABLE_RUSSIAN_EQUIVALENT = "blaablaa";
+    public static final String TABLE_RUSSIAN_EQUIVALENT = "ctol";
 
 
     @Resource
