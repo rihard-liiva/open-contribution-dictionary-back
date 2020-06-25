@@ -1,6 +1,14 @@
 # Open Contribution Dictionary Back End
 
-This project was generated with Spring-Boot version 2.3.1 using Java 11 and Gradle Project Template.
+This project was generated with <strong>Spring-Boot version 2.3.1</strong> using <strong>Java 11</strong> and <strong>Gradle</strong> Project Template.<br>
+
+## Database Information
+Project currently uses <strong>H2 Database</strong> for simplicity's sake.<br>
+```
+user: dict
+password: root
+url: jdbc:h2:~/dictionary;AUTO_SERVER=TRUE
+```
 
 ## API Information
 
